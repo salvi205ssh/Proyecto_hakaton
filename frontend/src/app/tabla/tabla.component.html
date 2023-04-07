@@ -1,0 +1,63 @@
+<nav>
+  <div>
+    <P>MY CRIPTOWALLET</P>
+  </div>
+  <div>
+    <P>{{ nombreUserLog }}</P>
+    <P>DEPOSIT:{{ cryptosUser[0]?.deposit }}</P>
+    <p>
+      <button mat-button color="accent" (click)="cerrarSesion()">
+        Log Out
+      </button>
+    </p>
+  </div>
+</nav>
+
+<div *ngIf="nombreUserLog">
+  <table class="lista_cryptos">
+    <tr>
+      <th>Nombre</th>
+      <th>Valor</th>
+      <th>Stock</th>
+      <th>Comprar</th>
+    </tr>
+    <tr *ngFor="let coin of coins; let i = index">
+      <td>{{ coin.cripto_name }}</td>
+      <td>{{ coin.value }}</td>
+      <td>{{ coin.stock }}</td>
+
+      <td *ngIf="checkName(coin.cripto_id)">
+        <button disabled>Comprar {{coin.cripto_id}}</button>
+      </td>
+       <td *ngIf="!checkName(coin.cripto_id)">
+          <button class="boton-{{ i }}" (click)="buyCoin(coin.cripto_id)">
+            Comprar {{coin.cripto_id}}
+          </button>
+        </td>
+    </tr>
+  </table>
+
+  <div class="container">
+    <table class="lista_cryptos">
+      <tr>
+        <th>ID</th>
+        <th>Asset</th>
+        <th>Icon</th>
+        <th>Crypto name</th>
+        <th>Value</th>
+        <th>Stock</th>
+        <th>Amount</th>
+      </tr>
+
+      <tr *ngFor="let coinUser of cryptosUser; let i = index">
+        <td>{{ coinUser.user_id }}</td>
+        <td>{{ coinUser.asset }}</td>
+        <img src="{{ coinUser.icon }}" alt="imgIcon" class="imgIcon" />
+        <td>{{ coinUser.cripto_name }}</td>
+        <td>{{ coinUser.value }}</td>
+        <td>{{ coinUser.stock }}</td>
+        <td>{{ coinUser.amount }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "criptos",
+    "dateExported": "2023-04-06T11:08:21.383Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "166205fc-c8c1-4bdf-85f2-e81c0d91054d",
+            "colId": "78a92a45-8c00-4973-bb9d-2007d362c75f",
+            "containerId": "",
+            "name": "http://localhost:3000/users/getUserById/1",
+            "url": "http://localhost:3000/api/users/add",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-04-06T11:08:01.556Z",
+            "modified": "2023-04-06T11:08:01.556Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"Pepe\",\n  \"password\": \"1234\",\n  \"fullname\": \"Pepe Hernandez\",\n  \"birthdate\": \"1995-12-12\",\n  \"deposit\": 20000\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

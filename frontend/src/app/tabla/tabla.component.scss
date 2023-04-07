@@ -1,0 +1,58 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #990000;
+    color: #ffffff;
+    padding: 8px;
+  }
+  
+  nav p {
+    margin: 0;
+  }
+  
+  .container {
+    margin: 16px auto;
+    max-width: 57%;
+    background-color: rgb(122, 41, 41);
+    padding: 1%;
+    
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    color: #333333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  th.mat-header-cell.cdk-header-cell {
+    text-align: center;
+    background-color: #990000;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  tr {
+    background-color: grey;
+    text-align: center;
+  }
+  
+  td {
+    background-color: rgb(217, 210, 210);
+    color: black;
+  }
+  
+  .imgIcon{
+    width: 32px;
+  }
+  
+  mat-form-field {
+    margin-bottom: 16px;
+  }
+  
+  mat-paginator {
+    margin-top: 16px;
+  }
+  
