@@ -13,7 +13,7 @@
   </div>
 </nav>
 
-<div *ngIf="nombreUserLog">
+<div class="container" *ngIf="nombreUserLog">
   <table class="lista_cryptos">
     <tr>
       <th>Nombre</th>
@@ -37,7 +37,6 @@
     </tr>
   </table>
 
-  <div class="container">
     <table class="lista_cryptos">
       <tr>
         <th>ID</th>
@@ -52,12 +51,12 @@
       <tr *ngFor="let coinUser of cryptosUser; let i = index">
         <td>{{ coinUser.user_id }}</td>
         <td>{{ coinUser.asset }}</td>
-        <img src="{{ coinUser.icon }}" alt="imgIcon" class="imgIcon" />
+        <td><img src="{{ coinUser.icon }}" alt="imgIcon" class="imgIcon" /></td>
+        
         <td>{{ coinUser.cripto_name }}</td>
         <td>{{ coinUser.value }}</td>
         <td>{{ coinUser.stock }}</td>
         <td>{{ coinUser.amount }}</td>
       </tr>
     </table>
-  </div>
 </div>

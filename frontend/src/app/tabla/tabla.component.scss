@@ -1,58 +1,71 @@
+/*Define la fuente y el tipo de letra que se utilizará para el texto en el cuerpo de la página.*/
+body {
+  font-family: Arial, sans-serif;
+}
+
+/*estilos para el navbar*/
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #990000;
-    color: #ffffff;
-    padding: 8px;
-  }
-  
-  nav p {
-    margin: 0;
-  }
-  
-  .container {
-    margin: 16px auto;
-    max-width: 57%;
-    background-color: rgb(122, 41, 41);
-    padding: 1%;
-    
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    color: #333333;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  th.mat-header-cell.cdk-header-cell {
-    text-align: center;
-    background-color: #990000;
-    font-weight: bold;
-    color: #ffffff;
-  }
-  
-  tr {
-    background-color: grey;
-    text-align: center;
-  }
-  
-  td {
-    background-color: rgb(217, 210, 210);
-    color: black;
-  }
-  
-  .imgIcon{
-    width: 32px;
-  }
-  
-  mat-form-field {
-    margin-bottom: 16px;
-  }
-  
-  mat-paginator {
-    margin-top: 16px;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e31e24;
+  padding: 10px;
+  color: #ffffff;
+}
+
+/*Elimina el margen predeterminado del párrafo dentro de la etiqueta div del navbar.*/
+nav div p {
+  margin: 0;
+}
+
+/*Estilo de los botones*/
+button {
+  background-color: #e31e24;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #333333;
+}
+
+button:disabled {
+  background-color: #f0f0f0;
+  color: #333333;
+  cursor: not-allowed;
+}
+
+.container {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.lista_cryptos {
+  width: 70%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.lista_cryptos th,
+.lista_cryptos td {
+  border: 1px solid #333333;
+  padding: 10px;
+  text-align: left;
+}
+
+.lista_cryptos th {
+  background-color: #e31e24;
+  color: #ffffff;
+}
+
+.imgIcon {
+  max-width: 50px;
+  height: auto;
+}
