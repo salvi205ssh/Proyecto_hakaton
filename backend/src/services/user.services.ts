@@ -32,7 +32,6 @@ export class UserService {
     const usersPromise = await this._userRepository
       .getLogin(username, password)
       .then((result) => {
-        
         if (!result) {
           return undefined;
         }
@@ -62,6 +61,23 @@ export class UserService {
       })
       .catch((error) => {
         console.error("ERROR obteniendo monedas de users en service");
+        console.error(error);
+
+        throw error;
+      });
+    return usersPromise;
+  }
+
+  async updateDeposit(costeMoneda: number, user_id: string): Promise<any> {
+    const usersPromise = await this._userRepository
+      .updateDeposit(costeMoneda, user_id)
+      .then((result) => {
+        console.log("Actualizando deposit de users en service");
+
+        return result;
+      })
+      .catch((error) => {
+        console.error("ERROR Actualizando deposit de users en service");
         console.error(error);
 
         throw error;

@@ -20,7 +20,7 @@ export class DataBaseService {
   }
 
   getCryptos(): Observable<Moneda[]> {
-   // console.log('service de getCryptos');
+    // console.log('service de getCryptos');
 
     // Hacemos una petición GET a la URL del servidor local
     return this.http.get<Moneda[]>('http://localhost:3000/monedas/all/');
@@ -32,14 +32,43 @@ export class DataBaseService {
   }
 
   //Todo: insertar usuario
-  /*     InsertUser(user: any): Observable<User> {
-      return this.http.post<User>('http://localhost:3000/api/users/add', user);
-    } */
+  InsertUser(user: any): Observable<User> {
+    console.log('insertando usuario');
+    return this.http.post<User>('http://localhost:3000/users/add', user);
+  }
 
   getTable(user_id: string): Observable<CryptosUser[]> {
     // Hacemos una petición GET a la URL del servidor local
     return this.http.get<CryptosUser[]>(
       'http://localhost:3000/users/getTable/' + user_id
     );
+  }
+
+  getCoinById(cripto_id: string): Observable<Moneda> {
+
+    return this.http.get<Moneda>(
+      'http://localhost:3000/monedas/getCoinById/' + cripto_id);
+  }
+
+  updatestock(cripto_id: string): Observable<any> {
+    console.log('Actualizando stock de moneda');
+    return this.http.put<any>(
+      'http://localhost:3000/monedas/updatestock/' + cripto_id,
+      null
+    );
+  }
+
+/*   updateDeposit(user_id: string, costeMoneda: number): Observable<any> {
+    console.log('Actualizando deposit de moneda');
+    return this.http.put<any>(
+      'http://localhost:3000/users/updateDeposit/',
+      user_id + '/' + costeMoneda
+    );
+  } */
+
+  updateDeposit(user_id: string, costeMoneda: number): Observable<any> {
+    console.log('Actualizando deposit de moneda');
+    const url = `http://localhost:3000/users/updateDeposit/${user_id}/${costeMoneda}`;
+    return this.http.put<any>(url, null);
   }
 }

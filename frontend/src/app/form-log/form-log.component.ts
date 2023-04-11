@@ -6,22 +6,20 @@ import { User } from '../interfaces/User.interface';
 @Component({
   selector: 'app-form-log',
   templateUrl: './form-log.component.html',
-  styleUrls: ['./form-log.component.scss']
+  styleUrls: ['./form-log.component.scss'],
 })
 export class FormLogComponent implements OnInit {
-
   userLog: User;
 
   constructor(
     private dataBaseService: DataBaseService,
     private router: Router
   ) {}
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   loginUser(username: string, password: string) {
-    console.log('username '+username);
-    console.log('password '+password);
+    console.log('username ' + username);
+    console.log('password ' + password);
 
     this.dataBaseService.getUserLog(username, password).subscribe(
       (user) => {
@@ -33,7 +31,6 @@ export class FormLogComponent implements OnInit {
         localStorage.setItem('user_id', this.userLog.user_id);
 
         this.redireccionAtabla();
-     
       },
       (error) => {
         // Si ocurre un error al iniciar sesión, muestra el mensaje de error en la consola
@@ -46,7 +43,10 @@ export class FormLogComponent implements OnInit {
   redireccionAtabla() {
     console.log('redireccion a tabla');
     this.router.navigate(['tabla']);
-  
-}
+  }
 
+  redireccionRegistro() {
+    console.log('redireccionRegistro');
+    this.router.navigate(['registro']);
+  }
 }

@@ -52,7 +52,7 @@ export class UserRepository {
       WHERE users.user_id ='6518e8f0-862e-4cef-8b81-519b10075e34'
       */
 
-/*       const coinsUser = await this._database.models.User.findAll({
+      /*       const coinsUser = await this._database.models.User.findAll({
         
         where: { user_id },
         include: [
@@ -86,6 +86,27 @@ export class UserRepository {
       );
       console.error(error);
       return [];
+    }
+  }
+
+  async updateDeposit(newDeposit: number, user_id: string): Promise<any> {
+    try {
+      const coinsUser = await this._database.sequelize.query(
+        "UPDATE public.users SET deposit=? WHERE user_id=?",
+        {
+          replacements: [newDeposit, user_id],
+          type: QueryTypes.UPDATE,
+        }
+      );
+
+      console.log("Actualizando deposit de usuarios en repository");
+      return coinsUser;
+    } catch (error) {
+      console.error(
+        "Se ha producido un error al Actualizar deposit en repository"
+      );
+      console.error(error);
+      return null;
     }
   }
 }

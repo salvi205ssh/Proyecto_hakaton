@@ -30,6 +30,42 @@ export class MonedaService {
     return cryptoPromise;
   }
 
+  async updatestock(cripto_id: string): Promise<any> {
+    const usersPromise = await this._coinRepository
+      .updatestock(cripto_id)
+      .then((result) => {
+        console.log("Actualizando stock de monedas en service");
+
+        return result;
+      })
+      .catch((error) => {
+        console.error("ERROR Actualizando stock de monedas en service");
+        console.error(error);
+
+        throw error;
+      });
+    return usersPromise;
+  }
+
+  async getCoinById(cripto_id: string): Promise<MonedaDto | undefined> {
+    const userPromise = await this._coinRepository
+      .getCoinById(cripto_id)
+      .then((userAsPojo) => {
+        if (!!userAsPojo) {
+          return this.parsePojoIntoDto(userAsPojo)
+        }else{
+          return undefined;
+        }
+
+      }).catch((error) => {
+        console.error("Error al recuperar usuarios");
+        console.error(error);
+        throw error;
+      });
+
+      return userPromise;
+  }
+
   parsePojoIntoDto(cryptoPojo: MonedaPojo): MonedaDto {
     const cryptoDto: MonedaDto = {
       cripto_id: cryptoPojo.cripto_id,

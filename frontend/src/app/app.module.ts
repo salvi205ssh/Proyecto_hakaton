@@ -8,11 +8,13 @@ import { TablaComponent } from './tabla/tabla.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FormLogModule } from './form-log/form-log.module';
+import { FormRegistroComponent } from './form-registro/form-registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TablaComponent,
+    FormRegistroComponent,
     
   ],
   imports: [

@@ -54,4 +54,22 @@ export const UserController = {
         res.sendStatus(500);
       });
   },
+  updateDeposit: (req: any, res: any) => {
+    const user_id = req.params.user_id;
+    const costeMoneda = +req.params.costeMoneda;
+
+    userService
+      .updateDeposit(costeMoneda, user_id)
+      .then((result) => {
+        console.log("Actualizando deposit de users en controller");
+
+        res.json(result);
+      })
+      .catch((exception) => {
+        console.log("Error Actualizando deposit de users en controller");
+
+        console.log(exception);
+        res.sendStatus(500);
+      });
+  },
 };

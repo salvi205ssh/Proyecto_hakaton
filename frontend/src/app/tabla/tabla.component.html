@@ -12,7 +12,7 @@
     </p>
   </div>
 </nav>
-
+<span>{{ mensaje }}</span>
 <div class="container" *ngIf="nombreUserLog">
   <table class="lista_cryptos">
     <tr>
@@ -27,36 +27,41 @@
       <td>{{ coin.stock }}</td>
 
       <td *ngIf="checkName(coin.cripto_id)">
-        <button disabled>Comprar {{coin.cripto_id}}</button>
+        <button disabled>Comprar {{ coin.cripto_id }}</button>
       </td>
-       <td *ngIf="!checkName(coin.cripto_id)">
-          <button class="boton-{{ i }}" (click)="buyCoin(coin.cripto_id)">
-            Comprar {{coin.cripto_id}}
-          </button>
-        </td>
+      <td *ngIf="!checkName(coin.cripto_id)">
+        <button class="boton-{{ i }}" (click)="buyCoin(coin.cripto_id)">
+          Comprar {{ coin.cripto_id }}
+        </button>
+      </td>
     </tr>
   </table>
 
-    <table class="lista_cryptos">
-      <tr>
-        <th>ID</th>
-        <th>Asset</th>
-        <th>Icon</th>
-        <th>Crypto name</th>
-        <th>Value</th>
-        <th>Stock</th>
-        <th>Amount</th>
-      </tr>
+  <table class="lista_cryptos">
+    <tr>
+      <!--  <th>ID</th> -->
+      <th>Crypto name</th>
+      <th>Asset</th>
+      <th>Icon</th>
 
-      <tr *ngFor="let coinUser of cryptosUser; let i = index">
-        <td>{{ coinUser.user_id }}</td>
-        <td>{{ coinUser.asset }}</td>
-        <td><img src="{{ coinUser.icon }}" alt="imgIcon" class="imgIcon" /></td>
-        
-        <td>{{ coinUser.cripto_name }}</td>
-        <td>{{ coinUser.value }}</td>
-        <td>{{ coinUser.stock }}</td>
-        <td>{{ coinUser.amount }}</td>
-      </tr>
-    </table>
+      <th>Value</th>
+      <th>Stock</th>
+      <th>Amount</th>
+    </tr>
+
+    <tr *ngFor="let coinUser of cryptosUser; let i = index">
+      <!-- <td>{{ coinUser.user_id }}</td> -->
+      <td>{{ coinUser.cripto_name }}</td>
+      <td>{{ coinUser.asset }}</td>
+      <td><img src="{{ coinUser.icon }}" alt="imgIcon" class="imgIcon" /></td>
+
+      <td>{{ coinUser.value }}</td>
+      <td>{{ coinUser.stock }}</td>
+      <td>
+        <button>-</button>
+        {{ coinUser.amount }}
+        <button>+</button>
+      </td>
+    </tr>
+  </table>
 </div>

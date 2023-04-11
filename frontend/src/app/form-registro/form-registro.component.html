@@ -1,0 +1,53 @@
+<form class="form">
+  <p class="MensajeError">{{MensajeError}}</p>
+  <p>
+    <label for="username">Name</label>
+    <input type="text" id="username" name="username" #username required />
+  </p>
+
+  <p>
+    <label for="password">password</label>
+    <input type="password" id="password" name="password" #password required />
+  </p>
+
+  <p>
+    <label for="password2">password repeat</label>
+    <input type="password" id="password2" name="password2" #password2 required />
+
+  </p>
+
+  <p>
+    <label for="fullname">fullname</label>
+    <input type="text" id="fullname" name="fullname" #fullname required />
+  </p>
+
+  <p>
+    <label for="birthdate">birthdate</label>
+    <input type="date" id="birthdate" name="birthdate" #birthdate required />
+
+  </p>
+
+  <p>
+    <label for="deposit">deposit</label>
+    <input type="number" id="deposit" name="deposit" #deposit required />
+  </p>
+
+  <div>
+    <button
+      type="submit"
+      (click)="
+        registro(
+          username.value,
+          password.value,
+          password2.value,
+          fullname.value,
+          birthdate.value,
+          +deposit.value
+        )
+      "
+    >
+      Add User
+    </button>
+    <button type="submit" (click)="salir()">Salir</button>
+  </div>
+</form>

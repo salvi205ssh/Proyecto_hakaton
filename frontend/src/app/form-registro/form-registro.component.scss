@@ -1,21 +1,20 @@
-form {
+.form {
   padding: 20px;
   background-color: #f4f4f4;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 300px;
+  width: 400px;
   margin: 0 auto;
 }
-
 label {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
 }
-
-/*Estilo para nombre y password*/
 input[type="text"],
-input[type="password"] {
+input[type="number"],
+input[type="password"],
+input[type="date"] {
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
@@ -24,8 +23,6 @@ input[type="password"] {
   box-sizing: border-box;
   font-size: 16px;
 }
-
-/*Estilo para los botones*/
 button[type="submit"] {
   background-color: #da291c;
   color: #fff;
@@ -35,9 +32,27 @@ button[type="submit"] {
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
+  margin-top: 20px;
   margin-right: 0.5rem;
 }
-
 button[type="submit"]:hover {
   background-color: #d80f0a;
 }
+
+/* .IqualPassTrue{
+  display: none;
+} */
+
+.MensajeError{
+  color: red;
+  display: block;
+}
+
+/* .mas18True{
+  display: none;
+}
+
+.mas18False{
+  color: red;
+  display: block;
+} */
