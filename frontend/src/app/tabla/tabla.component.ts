@@ -16,6 +16,7 @@ export class TablaComponent implements OnInit {
   idCoinLog: string = '';
   valueCoin: any;
   newDeposit: number = 0;
+  deposit: any;
   suficienteDinero = true;
   mensaje: string = '';
 
@@ -24,13 +25,14 @@ export class TablaComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private LoginService: LoginService,
+    private loginService: LoginService,
     private dataBaseService: DataBaseService
   ) {}
 
   ngOnInit(): void {
-    this.nombreUserLog = localStorage.getItem('nombre') || '';
-    this.idUserLog = localStorage.getItem('user_id') || '';
+    this.nombreUserLog = this.loginService.getUserLogin();
+    this.idUserLog = this.loginService.getIdUserLogin();
+    this.deposit = localStorage.getItem('deposit') || '';
 
     this.cargarTabla();
   }
@@ -46,14 +48,16 @@ export class TablaComponent implements OnInit {
       .subscribe((data) => {
         //console.log('coin', data);
         this.cryptosUser = data;
+        this.deposit = data[0].deposit;
       });
   }
+
   cerrarSesion() {
-    this.LoginService.logout();
+    this.loginService.logout();
     this.router.navigate(['login']);
   }
 
-  checkName(id: string): boolean {
+  deshabilitaBoton(id: string): boolean {
     //console.log('dentro de checkname ');
 
     for (let i = 0; i < this.cryptosUser.length; i++) {
@@ -76,6 +80,7 @@ export class TablaComponent implements OnInit {
       cripto_id: crypto_id,
       amount: 1,
     };
+    console.log('deposit en buycon', this.deposit);
 
     //modifica el deposit, inserta una fila en wallet y resta uno al stock
     this.dataBaseService
@@ -83,7 +88,7 @@ export class TablaComponent implements OnInit {
       .subscribe((Response) => {
         //console.log('valueCoin1: ' + Response.value);
 
-        if (this.cryptosUser[0].deposit < Response.value) {
+        if (this.deposit < Response.value) {
           //console.log('No tiene suficiente dinero');
           this.mensaje = 'No tiene suficiente dinero';
         } else {
@@ -169,7 +174,6 @@ export class TablaComponent implements OnInit {
       }
     });
   }
-  //----------------------------------------------------------------
 
   //Todo: venderMoneda
   venderMoneda(newAmount: number, user_id: string, cripto_id: string) {

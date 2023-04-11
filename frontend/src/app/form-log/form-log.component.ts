@@ -18,17 +18,18 @@ export class FormLogComponent implements OnInit {
   ngOnInit(): void {}
 
   loginUser(username: string, password: string) {
-    console.log('username ' + username);
-    console.log('password ' + password);
+    //console.log('username ' + username);
+    //console.log('password ' + password);
 
     this.dataBaseService.getUserLog(username, password).subscribe(
       (user) => {
         // Si se inicia sesión correctamente, haz algo con el usuario devuelto
-        console.log(user);
-        console.log('bien');
+        //console.log(user);
+        //console.log('bien');
         this.userLog = user;
         localStorage.setItem('nombre', username);
         localStorage.setItem('user_id', this.userLog.user_id);
+        localStorage.setItem('deposit', user.deposit.toString());
 
         this.redireccionAtabla();
       },

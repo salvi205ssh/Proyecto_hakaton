@@ -4,9 +4,9 @@
   </div>
   <div>
     <P>{{ nombreUserLog }}</P>
-    <P>DEPOSIT:{{ cryptosUser[0]?.deposit }}</P>
+    <P>DEPOSIT:{{ deposit }}</P>
     <p>
-      <button mat-button color="accent" (click)="cerrarSesion()">
+      <button color="accent" (click)="cerrarSesion()">
         Log Out
       </button>
     </p>
@@ -26,10 +26,10 @@
       <td>{{ coin.value }}</td>
       <td>{{ coin.stock }}</td>
 
-      <td *ngIf="checkName(coin.cripto_id)">
+      <td *ngIf="deshabilitaBoton(coin.cripto_id)">
         <button disabled>Comprar {{ coin.cripto_id }}</button>
       </td>
-      <td *ngIf="!checkName(coin.cripto_id)">
+      <td *ngIf="!deshabilitaBoton(coin.cripto_id)">
         <button class="boton-{{ i }}" (click)="buyCoin(coin.cripto_id)">
           Comprar {{ coin.cripto_id }}
         </button>
