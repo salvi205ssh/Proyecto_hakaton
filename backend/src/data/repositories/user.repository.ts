@@ -109,4 +109,14 @@ export class UserRepository {
       return null;
     }
   }
+
+  async getAllUsers(): Promise<UserPojo[]> {
+    try {
+      return await this._userRepository.findAll();
+    } catch (error) {
+      console.error("Se ha producido un error al recuperar usuarios");
+      console.error(error);
+      return [];
+    }
+  }
 }

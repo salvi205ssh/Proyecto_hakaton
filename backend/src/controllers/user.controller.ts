@@ -72,4 +72,16 @@ export const UserController = {
         res.sendStatus(500);
       });
   },
+
+  getAllUsers: (_req: any, res: any) => {
+    userService
+      .getAllUsers()
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((exception) => {
+        console.log(exception);
+        res.sendStatus(500);
+      });
+  },
 };

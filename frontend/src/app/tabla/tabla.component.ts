@@ -32,8 +32,8 @@ export class TablaComponent implements OnInit {
   ngOnInit(): void {
     this.nombreUserLog = this.loginService.getUserLogin();
     this.idUserLog = this.loginService.getIdUserLogin();
-    this.deposit = localStorage.getItem('deposit') || '';
-
+    this.deposit = parseFloat(localStorage.getItem('deposit') || '');
+    //this.deposit = JSON.parse(localStorage.getItem('deposit'));
     this.cargarTabla();
   }
 
@@ -48,7 +48,7 @@ export class TablaComponent implements OnInit {
       .subscribe((data) => {
         //console.log('coin', data);
         this.cryptosUser = data;
-        this.deposit = data[0].deposit;
+        this.deposit = data[0]?.deposit;
       });
   }
 

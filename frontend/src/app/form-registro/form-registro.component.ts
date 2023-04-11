@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataBaseService } from '../services/data-base.service';
+import { User } from '../interfaces/User.interface';
 
 @Component({
   selector: 'app-form-registro',
@@ -11,22 +12,36 @@ export class FormRegistroComponent implements OnInit {
   IqualPassword: boolean;
   edad: number;
   MensajeError: string;
+  MensajeErrorUserName: string;
+  userNames: User[] = [];
+  encontrado: boolean;
+
   constructor(
     private dataBaseService: DataBaseService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dataBaseService.getAllUserNames().subscribe((data) => {
+      this.userNames = data;
+    });
+  }
 
+  /**
+   * Función para calcular la edad a partir de una fecha de nacimiento.
+   * @param fechaNacimiento La fecha de nacimiento en formato string ('YYYY-MM-DD').
+   * @returns La edad calculada en años.
+   */
   calcularEdad(fechaNacimiento: string): number {
-    const hoy = new Date();
-    const cumpleanos = new Date(fechaNacimiento);
-    let edad = hoy.getFullYear() - cumpleanos.getFullYear();
-    const mes = hoy.getMonth() - cumpleanos.getMonth();
+    const hoy = new Date(); // Fecha actual
+    const cumpleanos = new Date(fechaNacimiento); // Fecha de nacimiento
+    let edad = hoy.getFullYear() - cumpleanos.getFullYear(); // Calcular la diferencia de años
+    const mes = hoy.getMonth() - cumpleanos.getMonth(); // Calcular la diferencia de meses
     if (mes < 0 || (mes === 0 && hoy.getDate() < cumpleanos.getDate())) {
-      edad--;
+      // Si el mes actual es menor al mes de nacimiento, o si están en el mismo mes pero el día actual es menor al día de nacimiento
+      edad--; // Restar un año a la edad
     }
-    return edad;
+    return edad; // Devolver la edad calculada
   }
 
   registro(
@@ -48,7 +63,7 @@ export class FormRegistroComponent implements OnInit {
 
     this.IqualPassword = password === password2;
 
-    console.log('IqualPassword' + this.IqualPassword);
+    //console.log('IqualPassword' + this.IqualPassword);
 
     this.edad = this.calcularEdad(birthdate);
     console.log('La edad del usuario es: ' + this.edad);
@@ -60,9 +75,21 @@ export class FormRegistroComponent implements OnInit {
       birthdate == '' ||
       deposit == 0;
 
+    const encontrado =
+      this.userNames.find((user) => user.username === username) !== undefined;
+    console.log('encontrado: ' + encontrado);
+
+    if (encontrado) {
+      this.MensajeErrorUserName = 'Ese usuario ya existe';
+    }
     //console.log('validacion_de_campos ' + camposVacios);
-    if (this.edad >= 18 && !camposVacios && this.IqualPassword) {
-      console.log('El usuario es mayor de edad');
+    if (
+      this.edad >= 18 &&
+      !camposVacios &&
+      this.IqualPassword &&
+      encontrado === false //falla
+    ) {
+      console.log('El usuario ' + username + ' es mayor de edad');
       this.dataBaseService.InsertUser(newUser).subscribe(
         (response) => {
           console.log('User added successfully', response);
@@ -78,10 +105,9 @@ export class FormRegistroComponent implements OnInit {
         }
       );
     } else {
-      
-      this.MensajeError = 'Hay errores en el formulario, Asegurate de haber rellenado todos los campos, de que las contraseñas sean iguales y de tener mas de 18 años ';
+      this.MensajeError =
+        'Hay errores en el formulario, Asegurate de haber rellenado todos los campos, de que las contraseñas sean iguales y de tener mas de 18 años ';
     }
-   
   }
 
   salir() {

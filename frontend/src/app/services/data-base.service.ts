@@ -36,6 +36,11 @@ export class DataBaseService {
     return this.http.post<User>('http://localhost:3000/users/add', user);
   }
 
+  getAllUserNames(): Observable<User[]> {
+    // Hacemos una petición GET a la URL del servidor local
+    return this.http.get<User[]>('http://localhost:3000/users/all');
+  }
+
   getTable(user_id: string): Observable<CryptosUser[]> {
     // Hacemos una petición GET a la URL del servidor local
     return this.http.get<CryptosUser[]>(

@@ -1,27 +1,76 @@
-# Frontend
+## Servicios utilizados
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
+  getUserLog(username: string, password: string): Observable<User> {
+    // Hacemos una petición GET a la URL del servidor local
+    return this.http.get<User>(
+      'http://localhost:3000/users/login/' + username + '/' + password
+    );
+  }
 
-## Development server
+  getCryptos(): Observable<Moneda[]> {
+    // console.log('service de getCryptos');
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+    // Hacemos una petición GET a la URL del servidor local
+    return this.http.get<Moneda[]>('http://localhost:3000/monedas/all/');
+  }
 
-## Code scaffolding
+  InsertWallet(wallet: any): Observable<Wallet> {
+    //console.log('comprando moneda');
+    return this.http.post<Wallet>('http://localhost:3000/wallet/add', wallet);
+  }
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  InsertUser(user: any): Observable<User> {
+    //console.log('insertando usuario');
+    return this.http.post<User>('http://localhost:3000/users/add', user);
+  }
 
-## Build
+  getAllUserNames(): Observable<User[]> {
+    // Hacemos una petición GET a la URL del servidor local
+    return this.http.get<User[]>('http://localhost:3000/users/all');
+  }
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+  getTable(user_id: string): Observable<CryptosUser[]> {
+    // Hacemos una petición GET a la URL del servidor local
+    return this.http.get<CryptosUser[]>(
+      'http://localhost:3000/users/getTable/' + user_id
+    );
+  }
 
-## Running unit tests
+  getCoinById(cripto_id: string): Observable<Moneda> {
+    return this.http.get<Moneda>(
+      'http://localhost:3000/monedas/getCoinById/' + cripto_id
+    );
+  }
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  updatestock(cripto_id: string, newStock: number): Observable<any> {
+    console.log('Actualizando stock de moneda');
+    const url = `http://localhost:3000/monedas/updatestock/${cripto_id}/${newStock}`;
 
-## Running end-to-end tests
+    return this.http.put<any>(url, null);
+  }
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  /*   updateDeposit(user_id: string, costeMoneda: number): Observable<any> {
+    console.log('Actualizando deposit de moneda');
+    return this.http.put<any>(
+      'http://localhost:3000/users/updateDeposit/',
+      user_id + '/' + costeMoneda
+    );
+  } */
 
-## Further help
+  updateDeposit(user_id: string, costeMoneda: number): Observable<any> {
+    console.log('Actualizando deposit de moneda');
+    const url = `http://localhost:3000/users/updateDeposit/${user_id}/${costeMoneda}`;
+    return this.http.put<any>(url, null);
+  }
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  updateAmount(
+    newAmount: number,
+    user_id: string,
+    cripto_id: string
+  ): Observable<any> {
+    console.log('Actualizando amount de wallet');
+    const url = `http://localhost:3000/wallet/updateAmount/${newAmount}/${user_id}/${cripto_id}`;
+    return this.http.put<any>(url, null);
+  }
+
+  

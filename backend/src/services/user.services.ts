@@ -85,6 +85,25 @@ export class UserService {
     return usersPromise;
   }
 
+  async getAllUsers(): Promise<UserDto[]> {
+    const usersPromise = await this._userRepository
+      .getAllUsers()
+      .then((usersAsPojo) => {
+        let usersAsDto: UserDto[] = [];
+        usersAsPojo.forEach((usersAsPojo) => {
+          let userAsDto = this.parsePojoIntoDto(usersAsPojo);
+          usersAsDto.push(userAsDto);
+        });
+        return usersAsDto;
+      })
+      .catch((error) => {
+        console.error("Error al recuperar usuarios");
+        console.error(error);
+        throw error;
+      });
+    return usersPromise;
+  }
+
   parsePojoIntoDto(userPojo: UserPojo): UserDto {
     const userDto: UserDto = {
       user_id: userPojo.user_id,

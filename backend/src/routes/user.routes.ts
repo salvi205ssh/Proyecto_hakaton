@@ -8,8 +8,8 @@ const router = express.Router();
 router.post("/add", UserController.addUser);
 router.get("/login/:username/:password", UserController.getUserByLogin);
 router.get("/getTable/:user_id", UserController.getAllCryptosUser);
-router.put("/updateDeposit/:user_id/:costeMoneda", UserController.updateDeposit
-);
+router.put("/updateDeposit/:user_id/:costeMoneda", UserController.updateDeposit);
+router.get("/all", UserController.getAllUsers);
 
 export default router;
 module.exports = router;
