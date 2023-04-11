@@ -12,7 +12,7 @@
     </p>
   </div>
 </nav>
-<span>{{ mensaje }}</span>
+<div class="alerta"><h1>{{ mensaje }}</h1></div>
 <div class="container" *ngIf="nombreUserLog">
   <table class="lista_cryptos">
     <tr>
@@ -58,8 +58,8 @@
       <td>{{ coinUser.value }}</td>
       <td>{{ coinUser.stock }}</td>
       <td>
-        <button>-</button>
-        {{ coinUser.amount }}
+        <button (click)="venderMoneda(coinUser.amount,coinUser.user_id, coinUser.cripto_id)">-</button>
+        {{ coinUser.amount.toString().padStart(2, '0') }}
         <button (click)="comprarMasMonedas(coinUser.amount,coinUser.user_id, coinUser.cripto_id)">+</button>
       </td>
     </tr>

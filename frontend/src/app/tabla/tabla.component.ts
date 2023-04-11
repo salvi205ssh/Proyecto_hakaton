@@ -96,14 +96,13 @@ export class TablaComponent implements OnInit {
               //console.log('newCoin.cripto_id: ' + newCoin.cripto_id);
 
               this.cargarTabla();
-             
             },
             (error) => {
               //console.error('Error adding coin', error);
             }
           );
 
-          this.newDeposit = this.cryptosUser[0].deposit - Response.value;
+          this.newDeposit = +this.cryptosUser[0].deposit - +Response.value;
           const newStock = Response.stock - 1;
           this.updateDeposit(this.idUserLog, this.newDeposit);
           this.updateStock(newCoin.cripto_id, newStock);
@@ -133,43 +132,87 @@ export class TablaComponent implements OnInit {
     );
   }
 
-  //------------------------------------------------------------------------------------------------
   comprarMasMonedas(newAmount: number, user_id: string, cripto_id: string) {
-    console.log('user_id: ', user_id);
+    /* console.log('user_id: ', user_id);
     console.log('cripto_id: ', cripto_id);
-    console.log('newAmount: ', newAmount);
+    console.log('newAmount: ', newAmount); */
     const newValue = newAmount + 1;
-    console.log('newAmount: ', newAmount);
+    //console.log('newAmount: ', newAmount);
 
     this.dataBaseService.getCoinById(cripto_id).subscribe((result) => {
-      if (this.cryptosUser[0].deposit < result.value) {
+      if (this.cryptosUser[0].deposit < result.value || result.stock < 1) {
         //console.log('No tiene suficiente dinero');
-        this.mensaje = 'No tiene suficiente dinero';
+
+        this.mensaje = 'No tiene suficiente dinero o no queda stock';
       } else {
         this.mensaje = '';
 
-        console.log('valueCoin en comprarMasMonedas: ', result.value);
-        this.newDeposit = this.cryptosUser[0].deposit - result.value;
+        this.newDeposit = +this.cryptosUser[0].deposit - +result.value;
         const newStock = result.stock - 1;
 
         this.updateDeposit(this.idUserLog, this.newDeposit);
         this.updateStock(cripto_id, newStock);
+
+        this.dataBaseService
+          .updateAmount(newValue, user_id, cripto_id)
+          .subscribe(
+            (response) => {
+              console.log('Amount aumentado', response);
+              this.cargarTabla();
+            },
+            (error) => {
+              console.error('Error actualizando amount', error);
+            }
+          );
+
         this.cargarTabla();
       }
     });
-
-    this.dataBaseService.updateAmount(newValue, user_id, cripto_id).subscribe(
-      (response) => {
-        console.log('Amount aumentado', response);
-        this.cargarTabla();
-      },
-      (error) => {
-        console.error('Error actualizando amount', error);
-      }
-    );
-    this.cargarTabla();
   }
   //----------------------------------------------------------------
 
-   //Todo: venderMoneda
+  //Todo: venderMoneda
+  venderMoneda(newAmount: number, user_id: string, cripto_id: string) {
+    /* console.log('user_id: ', user_id);
+    console.log('cripto_id: ', cripto_id);
+    console.log('newAmount: ', newAmount); */
+    const newValue = newAmount - 1;
+    //console.log('newAmount: ', newAmount);
+
+    this.dataBaseService.getCoinById(cripto_id).subscribe((result) => {
+      if (newValue == 0) {
+        //console.log('No tiene suficiente dinero');
+        this.mensaje = 'No tienes mas monedas para vender';
+      } else {
+        this.mensaje = '';
+        const deposit = Number(this.cryptosUser[0].deposit).toFixed(2);
+        /*         console.log('deposit: ', typeof this.cryptosUser[0].deposit);
+        console.log('depositParse: ', deposit);
+        console.log('depositType: ', typeof deposit);
+        console.log('valor: ',result.value) */
+
+        this.newDeposit = +this.cryptosUser[0].deposit + +result.value;
+
+        const newStock = result.stock + 1;
+        //console.log('newDeposit1: '+this.newDeposit)
+
+        this.updateDeposit(this.idUserLog, this.newDeposit);
+        this.updateStock(cripto_id, newStock);
+        //console.log('newDeposit2: ', this.newDeposit)
+        this.dataBaseService
+          .updateAmount(newValue, user_id, cripto_id)
+          .subscribe(
+            (response) => {
+              console.log('Amount aumentado', response);
+              this.cargarTabla();
+            },
+            (error) => {
+              console.error('Error actualizando amount', error);
+            }
+          );
+
+        this.cargarTabla();
+      }
+    });
+  }
 }

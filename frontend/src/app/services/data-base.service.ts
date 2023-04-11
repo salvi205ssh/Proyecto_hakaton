@@ -32,7 +32,7 @@ export class DataBaseService {
   }
 
   InsertUser(user: any): Observable<User> {
-    console.log('insertando usuario');
+    //console.log('insertando usuario');
     return this.http.post<User>('http://localhost:3000/users/add', user);
   }
 
