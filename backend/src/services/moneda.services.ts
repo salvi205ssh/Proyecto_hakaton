@@ -30,9 +30,9 @@ export class MonedaService {
     return cryptoPromise;
   }
 
-  async updatestock(cripto_id: string): Promise<any> {
+  async updatestock(cripto_id: string, newStock: number): Promise<any> {
     const usersPromise = await this._coinRepository
-      .updatestock(cripto_id)
+      .updatestock(cripto_id, newStock)
       .then((result) => {
         console.log("Actualizando stock de monedas en service");
 

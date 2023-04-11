@@ -42,7 +42,7 @@
       <!--  <th>ID</th> -->
       <th>Crypto name</th>
       <th>Asset</th>
-      <th>Icon</th>
+      <!-- <th>Icon</th> -->
 
       <th>Value</th>
       <th>Stock</th>
@@ -53,14 +53,14 @@
       <!-- <td>{{ coinUser.user_id }}</td> -->
       <td>{{ coinUser.cripto_name }}</td>
       <td>{{ coinUser.asset }}</td>
-      <td><img src="{{ coinUser.icon }}" alt="imgIcon" class="imgIcon" /></td>
+      <!-- <td><img src="{{ coinUser.icon }}" alt="imgIcon" class="imgIcon" /></td> -->
 
       <td>{{ coinUser.value }}</td>
       <td>{{ coinUser.stock }}</td>
       <td>
         <button>-</button>
         {{ coinUser.amount }}
-        <button>+</button>
+        <button (click)="comprarMasMonedas(coinUser.amount,coinUser.user_id, coinUser.cripto_id)">+</button>
       </td>
     </tr>
   </table>

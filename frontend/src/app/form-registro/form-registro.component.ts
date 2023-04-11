@@ -81,7 +81,7 @@ export class FormRegistroComponent implements OnInit {
       
       this.MensajeError = 'Hay errores en el formulario, Asegurate de haber rellenado todos los campos, de que las contraseñas sean iguales y de tener mas de 18 años ';
     }
-    //TODO: mas de 18, nombre lleno,
+   
   }
 
   salir() {

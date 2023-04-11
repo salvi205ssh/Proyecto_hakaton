@@ -17,7 +17,7 @@ export class TablaComponent implements OnInit {
   valueCoin: any;
   newDeposit: number = 0;
   suficienteDinero = true;
-  mensaje:string = '';
+  mensaje: string = '';
 
   coins: Moneda[] = [];
   cryptosUser: CryptosUser[] = [];
@@ -84,10 +84,10 @@ export class TablaComponent implements OnInit {
         //console.log('valueCoin1: ' + Response.value);
 
         if (this.cryptosUser[0].deposit < Response.value) {
-          console.log('No tiene suficiente dinero');
-          this.mensaje="No tiene suficiente dinero";
+          //console.log('No tiene suficiente dinero');
+          this.mensaje = 'No tiene suficiente dinero';
         } else {
-          this.mensaje="";
+          this.mensaje = '';
 
           console.log('buyCoin ');
           this.dataBaseService.InsertWallet(newCoin).subscribe(
@@ -96,21 +96,23 @@ export class TablaComponent implements OnInit {
               //console.log('newCoin.cripto_id: ' + newCoin.cripto_id);
 
               this.cargarTabla();
-              //Todo: restar del deposit y sumar amount al comprar
+             
             },
             (error) => {
               //console.error('Error adding coin', error);
             }
           );
+
           this.newDeposit = this.cryptosUser[0].deposit - Response.value;
+          const newStock = Response.stock - 1;
           this.updateDeposit(this.idUserLog, this.newDeposit);
-          this.updateStock(newCoin.cripto_id);
+          this.updateStock(newCoin.cripto_id, newStock);
         }
       });
   }
 
-  updateStock(cripto_id: string) {
-    this.dataBaseService.updatestock(cripto_id).subscribe(
+  updateStock(cripto_id: string, newStock: number) {
+    this.dataBaseService.updatestock(cripto_id, newStock).subscribe(
       (Response) => {
         //console.log('Stock actualizado', Response);
       },
@@ -130,4 +132,44 @@ export class TablaComponent implements OnInit {
       }
     );
   }
+
+  //------------------------------------------------------------------------------------------------
+  comprarMasMonedas(newAmount: number, user_id: string, cripto_id: string) {
+    console.log('user_id: ', user_id);
+    console.log('cripto_id: ', cripto_id);
+    console.log('newAmount: ', newAmount);
+    const newValue = newAmount + 1;
+    console.log('newAmount: ', newAmount);
+
+    this.dataBaseService.getCoinById(cripto_id).subscribe((result) => {
+      if (this.cryptosUser[0].deposit < result.value) {
+        //console.log('No tiene suficiente dinero');
+        this.mensaje = 'No tiene suficiente dinero';
+      } else {
+        this.mensaje = '';
+
+        console.log('valueCoin en comprarMasMonedas: ', result.value);
+        this.newDeposit = this.cryptosUser[0].deposit - result.value;
+        const newStock = result.stock - 1;
+
+        this.updateDeposit(this.idUserLog, this.newDeposit);
+        this.updateStock(cripto_id, newStock);
+        this.cargarTabla();
+      }
+    });
+
+    this.dataBaseService.updateAmount(newValue, user_id, cripto_id).subscribe(
+      (response) => {
+        console.log('Amount aumentado', response);
+        this.cargarTabla();
+      },
+      (error) => {
+        console.error('Error actualizando amount', error);
+      }
+    );
+    this.cargarTabla();
+  }
+  //----------------------------------------------------------------
+
+   //Todo: venderMoneda
 }

@@ -5,7 +5,7 @@ const router = express.Router();
 
 //llama a las funciones
 router.get("/all", MonedaController.getAllCryptos);
-router.put("/updatestock/:cripto_id", MonedaController.updatestock);
+router.put("/updatestock/:cripto_id/:newStock", MonedaController.updatestock);
 router.get("/getCoinById/:cripto_id", MonedaController.getCoinById);
 
 export default router;

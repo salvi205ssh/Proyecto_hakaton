@@ -20,4 +20,24 @@ export const WalletController = {
       res.sendStatus(500);
     }
   },
+
+  updateAmount: (req: any, res: any) => {
+    const newAmount = +req.params.newAmount;
+    const user_id = req.params.user_id;
+    const cripto_id = req.params.cripto_id;
+
+    walletService
+      .updateAmount(newAmount, user_id, cripto_id)
+      .then((result) => {
+        console.log("Actualizando amount de wallet en controller");
+
+        res.json(result);
+      })
+      .catch((exception) => {
+        console.log("Error Actualizando amount de wallet en controller");
+
+        console.log(exception);
+        res.sendStatus(500);
+      });
+  },
 };

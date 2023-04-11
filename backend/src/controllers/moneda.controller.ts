@@ -21,9 +21,10 @@ export const MonedaController = {
 
   updatestock: (req: any, res: any) => {
     const cripto_id = req.params.cripto_id;
+    const newStock = req.params.newStock;
 
     monedaService
-      .updatestock(cripto_id)
+      .updatestock(cripto_id, newStock)
       .then((result) => {
         console.log("Actualizando stock de monedas en controller");
 
