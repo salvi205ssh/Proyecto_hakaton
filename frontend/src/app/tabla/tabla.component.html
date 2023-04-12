@@ -1,19 +1,22 @@
 <nav>
   <div>
-    <P>MY CRIPTOWALLET</P>
+    <div class="logo">
+      <div class="crypto-logo"></div>
+      <div class="logo_text">wallet</div>
+    </div>
   </div>
   <div>
     <P>{{ nombreUserLog }}</P>
     <P>DEPOSIT:{{ deposit }}</P>
     <p>
-      <button (click)="cerrarSesion()">
-        Log Out
-      </button>
+      <button (click)="cerrarSesion()">Log Out</button>
     </p>
   </div>
 </nav>
 
-<div class="alerta"><h1>{{ mensaje }}</h1></div>
+<div class="alerta">
+  <h1>{{ mensaje }}</h1>
+</div>
 <div class="container" *ngIf="nombreUserLog">
   <table class="lista_cryptos">
     <tr>
@@ -61,9 +64,27 @@
       <td>{{ coinUser.value }}</td>
       <td>{{ coinUser.stock }}</td>
       <td>
-        <button (click)="venderMoneda(coinUser.amount,coinUser.user_id, coinUser.cripto_id)" title="Vender moneda">-</button>
-        {{ coinUser.amount.toString().padStart(2, '0') }}
-        <button (click)="comprarMasMonedas(coinUser.amount,coinUser.user_id, coinUser.cripto_id)" title="Comprar moneda">+</button>
+        <button
+          (click)="
+            venderMoneda(coinUser.amount, coinUser.user_id, coinUser.cripto_id)
+          "
+          title="Vender moneda"
+        >
+          -
+        </button>
+        {{ coinUser.amount.toString().padStart(2, "0") }}
+        <button
+          (click)="
+            comprarMasMonedas(
+              coinUser.amount,
+              coinUser.user_id,
+              coinUser.cripto_id
+            )
+          "
+          title="Comprar moneda"
+        >
+          +
+        </button>
       </td>
     </tr>
   </table>

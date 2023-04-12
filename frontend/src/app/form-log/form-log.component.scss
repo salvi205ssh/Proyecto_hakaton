@@ -1,3 +1,28 @@
+/* Estilos para el navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e31e24;
+  padding: 10px;
+  color: #ffffff;
+}
+
+/* Elimina el margen predeterminado del párrafo dentro de la etiqueta div del navbar. */
+nav div p {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+
+}
+
+.container {
+  width: 100%;
+  overflow-x: auto; /* Añade una barra de desplazamiento horizontal si el contenido se desborda del contenedor */
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-top: 1rem;
+}
 form {
   padding: 20px;
   background-color: #f4f4f4;
@@ -44,4 +69,40 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #d80f0a;
+}
+
+/* ---------- */
+/* Logo */
+.crypto-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #fff;
+}
+
+.crypto-logo::before {
+  content: "My";
+  font-size: 2rem;
+  color: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.logo_text {
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: "Segoe UI", sans-serif;
+  color: black;
 }

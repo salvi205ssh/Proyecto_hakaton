@@ -4,6 +4,7 @@ import {
   CanActivate,
   CanLoad,
   Route,
+  Router,
   RouterStateSnapshot,
   UrlSegment,
   UrlTree,
@@ -14,9 +15,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class NoLoginGuard implements CanActivate, CanLoad {
+  constructor(
+    private router: Router
+  ) { }
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
+    
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
@@ -28,6 +33,7 @@ export class NoLoginGuard implements CanActivate, CanLoad {
     ) {
       return true;
     } else {
+      this.router.navigate(['/login']);
       return false;
     }
   }

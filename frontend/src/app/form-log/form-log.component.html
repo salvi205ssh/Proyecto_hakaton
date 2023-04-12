@@ -1,18 +1,29 @@
-<form>
-  <p class="ErrroLog">{{ mensajeErrorLog }}</p>
-  <p>
-    <label for="name">Nombre</label>
-    <input type="text" id="name" name="name" ngModel #username />
-  </p>
-  <p>
-    <label for="password">Password</label>
-
-    <input type="password" id="password" name="password" ngModel #password />
-  </p>
+<nav>
   <div>
-    <button type="submit" (click)="loginUser(username.value, password.value)">
-      Iniciar sesión
-    </button>
-    <button type="submit" (click)="redireccionRegistro()">Registro</button>
+    <div class="logo">
+      <div class="crypto-logo"></div>
+      <div class="logo_text">wallet</div>
+    </div>
   </div>
-</form>
+</nav>
+
+<div class="container">
+  <form>
+    <p class="ErrroLog">{{ mensajeErrorLog }}</p>
+    <p>
+      <label for="name">Nombre</label>
+      <input type="text" id="name" name="name" ngModel #username />
+    </p>
+    <p>
+      <label for="password">Password</label>
+
+      <input type="password" id="password" name="password" ngModel #password />
+    </p>
+    <div>
+      <button type="submit" (click)="loginUser(username.value, password.value)">
+        Iniciar sesión
+      </button>
+      <button type="submit" (click)="redireccionRegistro()">Registro</button>
+    </div>
+  </form>
+</div>
