@@ -17,6 +17,7 @@ export class LoginService {
 
   logout() {
     console.log('logout');
+    localStorage.removeItem('user_id');
     return localStorage.removeItem('nombre');
   }
 }

@@ -4,16 +4,8 @@ import { FormLogComponent } from './form-log.component';
 import { FormsModule } from '@angular/forms';
 import { LoginFormRoutes } from './login-form.routing';
 
-
-
 @NgModule({
-  declarations: [
-    FormLogComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    LoginFormRoutes
-  ]
+  declarations: [FormLogComponent],
+  imports: [CommonModule, FormsModule, LoginFormRoutes],
 })
-export class FormLogModule { }
+export class FormLogModule {}

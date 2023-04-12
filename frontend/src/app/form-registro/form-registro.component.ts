@@ -10,11 +10,11 @@ import { User } from '../interfaces/User.interface';
 })
 export class FormRegistroComponent implements OnInit {
   IqualPassword: boolean;
-  edad: number;
-  MensajeError: string;
-  MensajeErrorUserName: string;
-  userNames: User[] = [];
-  encontrado: boolean;
+  edad: number; //Guarda el calculo de la edad en años
+  MensajeError: string; //Guarda el mensaje de errores en el formulario
+  MensajeErrorUserName: string; //Guarda el mensaje, El usuario ya existe
+  userNames: User[] = []; //array de userNames para comprobar que el usuario insertado en login no se repita
+  encontrado: boolean; //guarda true si se repite el username
 
   constructor(
     private dataBaseService: DataBaseService,
@@ -27,10 +27,9 @@ export class FormRegistroComponent implements OnInit {
     });
   }
 
-  /**
-   * Función para calcular la edad a partir de una fecha de nacimiento.
-   * @param fechaNacimiento La fecha de nacimiento en formato string ('YYYY-MM-DD').
-   * @returns La edad calculada en años.
+  /*
+    Función para calcular la edad a partir de una fecha de nacimiento.
+    La edad calculada en años.
    */
   calcularEdad(fechaNacimiento: string): number {
     const hoy = new Date(); // Fecha actual
@@ -44,6 +43,7 @@ export class FormRegistroComponent implements OnInit {
     return edad; // Devolver la edad calculada
   }
 
+  //----------------------------------------------------------------
   registro(
     username: string,
     password: string,
@@ -109,6 +109,9 @@ export class FormRegistroComponent implements OnInit {
         'Hay errores en el formulario, Asegurate de haber rellenado todos los campos, de que las contraseñas sean iguales y de tener mas de 18 años ';
     }
   }
+
+  // Fin de funcion registro()
+  //----------------------------------------------------------------
 
   salir() {
     this.router.navigate(['login']);

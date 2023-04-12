@@ -9,9 +9,8 @@ import { User } from '../interfaces/User.interface';
   styleUrls: ['./form-log.component.scss'],
 })
 export class FormLogComponent implements OnInit {
-  userLog: User;
-  mensajeErrorLog: string;
-  logueado: boolean = true;
+  userLog: User; //guarda el usuario que devuelve la funcion loginUser()
+  mensajeErrorLog: string; //mensaje si hay error al loguearse
 
   constructor(
     private dataBaseService: DataBaseService,
@@ -36,13 +35,18 @@ export class FormLogComponent implements OnInit {
         this.redireccionAtabla();
       },
       (error) => {
-        // Si ocurre un error al iniciar sesión, muestra el mensaje de error en la consola
         console.log(error);
         console.log('mal');
       }
     );
-
-    this.mensajeErrorLog = 'El usuario o la contraseña no son correctos';
+    if (
+      localStorage.getItem('nombre') != '' &&
+      localStorage.getItem('nombre') != null
+    ) {
+      this.mensajeErrorLog = '';
+    } else {
+      this.mensajeErrorLog = 'El usuario o la contraseña no son correctos';
+    }
   }
 
   redireccionAtabla() {

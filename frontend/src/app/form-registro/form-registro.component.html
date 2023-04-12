@@ -1,6 +1,6 @@
 <form class="form">
-  <p class="MensajeError">{{MensajeError}}</p>
-  <p class="MensajeError">{{MensajeErrorUserName}}</p>
+  <p class="MensajeError">{{ MensajeError }}</p>
+  <p class="MensajeError">{{ MensajeErrorUserName }}</p>
   <p>
     <label for="username">Name</label>
     <input type="text" id="username" name="username" #username required />
@@ -13,8 +13,13 @@
 
   <p>
     <label for="password2">password repeat</label>
-    <input type="password" id="password2" name="password2" #password2 required />
-
+    <input
+      type="password"
+      id="password2"
+      name="password2"
+      #password2
+      required
+    />
   </p>
 
   <p>
@@ -25,7 +30,6 @@
   <p>
     <label for="birthdate">birthdate</label>
     <input type="date" id="birthdate" name="birthdate" #birthdate required />
-
   </p>
 
   <p>

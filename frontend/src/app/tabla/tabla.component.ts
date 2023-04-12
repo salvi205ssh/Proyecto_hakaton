@@ -13,15 +13,15 @@ import { CryptosUser } from '../interfaces/User.interface';
 export class TablaComponent implements OnInit {
   nombreUserLog: string = '';
   idUserLog: string = '';
-  idCoinLog: string = '';
-  valueCoin: any;
-  newDeposit: number = 0;
-  deposit: any;
-  suficienteDinero = true;
-  mensaje: string = '';
+  //idCoinLog: string = '';
+  //valueCoin: any;
+  newDeposit: number = 0; //Guarda el valor del nuevo deposito de updateDposit()
+  deposit: any;  //Guarda el valor de deposit del navbar
+  //suficienteDinero = true;
+  mensaje: string = ''; //Mensaje de error si no hay stock o no queda dinero
 
-  coins: Moneda[] = [];
-  cryptosUser: CryptosUser[] = [];
+  coins: Moneda[] = []; //Array de las monedas de la tabla para comprar monedas
+  cryptosUser: CryptosUser[] = [];  //Array de las monedas de el usuario logueado
 
   constructor(
     private router: Router,
@@ -43,6 +43,7 @@ export class TablaComponent implements OnInit {
       // console.log('coin', data);
       this.coins = data;
     });
+
     this.dataBaseService
       .getTable(localStorage.getItem('user_id') || '')
       .subscribe((data) => {
@@ -80,7 +81,8 @@ export class TablaComponent implements OnInit {
       cripto_id: crypto_id,
       amount: 1,
     };
-    console.log('deposit en buycon', this.deposit);
+
+    //console.log('deposit en buycon', this.deposit);
 
     //modifica el deposit, inserta una fila en wallet y resta uno al stock
     this.dataBaseService
@@ -184,7 +186,7 @@ export class TablaComponent implements OnInit {
     //console.log('newAmount: ', newAmount);
 
     this.dataBaseService.getCoinById(cripto_id).subscribe((result) => {
-      if (newValue == 0) {
+      if (newValue <1) {
         //console.log('No tiene suficiente dinero');
         this.mensaje = 'No tienes mas monedas para vender';
       } else {
