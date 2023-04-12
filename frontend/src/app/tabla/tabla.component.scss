@@ -1,9 +1,9 @@
-/*Define la fuente y el tipo de letra que se utilizará para el texto en el cuerpo de la página.*/
+/* Define la fuente y el tipo de letra que se utilizará para el texto en el cuerpo de la página. */
 body {
   font-family: Arial, sans-serif;
 }
 
-/*estilos para el navbar*/
+/* Estilos para el navbar */
 nav {
   display: flex;
   justify-content: space-between;
@@ -13,12 +13,12 @@ nav {
   color: #ffffff;
 }
 
-/*Elimina el margen predeterminado del párrafo dentro de la etiqueta div del navbar.*/
+/* Elimina el margen predeterminado del párrafo dentro de la etiqueta div del navbar. */
 nav div p {
   margin: 0;
 }
 
-/*Estilo de los botones*/
+/* Estilo de los botones */
 button {
   background-color: #e31e24;
   color: #ffffff;
@@ -32,6 +32,7 @@ button:hover {
   background-color: #333333;
 }
 
+/*Estilos del boton deshabilitado*/
 button:disabled {
   background-color: #f0f0f0;
   color: #333333;
@@ -40,15 +41,15 @@ button:disabled {
 
 .container {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: auto; /* Añade una barra de desplazamiento horizontal si el contenido se desborda del contenedor */
   display: flex;
   flex-flow: column;
   align-items: center;
   margin-top: 1rem;
 }
 
-.alerta{
-  color: yellowgreen;
+.alerta {
+  color: red; /* Texto en rojo */
 }
 
 .lista_cryptos {
@@ -59,14 +60,14 @@ button:disabled {
 
 .lista_cryptos th,
 .lista_cryptos td {
-  border: 1px solid #333333;
+  border: 1px solid #333333; /* Borde negro */
   padding: 10px;
   text-align: center;
 }
 
 .lista_cryptos th {
-  background-color: #e31e24;
-  color: #ffffff;
+  background-color: #e31e24; /* Fondo rojo */
+  color: #ffffff; /* Texto blanco */
 }
 
 .imgIcon {

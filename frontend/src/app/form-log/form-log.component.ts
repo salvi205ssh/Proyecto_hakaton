@@ -10,6 +10,8 @@ import { User } from '../interfaces/User.interface';
 })
 export class FormLogComponent implements OnInit {
   userLog: User;
+  mensajeErrorLog: string;
+  logueado: boolean = true;
 
   constructor(
     private dataBaseService: DataBaseService,
@@ -39,6 +41,8 @@ export class FormLogComponent implements OnInit {
         console.log('mal');
       }
     );
+
+    this.mensajeErrorLog = 'El usuario o la contraseña no son correctos';
   }
 
   redireccionAtabla() {
